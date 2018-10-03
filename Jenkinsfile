@@ -5,17 +5,13 @@ pipeline {
     string(name: 'DOCKER_PUSH_USERNAME', defaultValue: 'ramanurs', description: 'Docker group username for pushing images..')
 	string(name: 'PROJECT_NAME', defaultValue: 'orm', description: 'project name for creating image..')
 	}
-	tools { 
-        maven 'M3' 
-    }
+	
 	stages {
           
 	  
 	  stage('Prepare Build image...'){
 	   steps{
 		script {
-			pom = readMavenPom file: 'pom.xml'
-			//sh "echo Project Version: ${pom.version}"
 			IMAGE_NAME = "${params.DOCKER_PUSH_USERNAME}/${params.PROJECT_NAME}:1.0_100"
 		}
 		sh "echo Project Version1: ${IMAGE_NAME}"
